@@ -43,13 +43,7 @@ export default async function Home() {
 
                 </div>
 
-                <div className="flex flex-col items-center">
-                    <p className="text-3xl font-bold text-violet-500">
-                        Client Side Check
-                    </p>
-                    <Zoom/>
-                </div>
-
+                <Zoom />
             </main>
             <footer className="w-full">
                 {renderInstallBtn()}
