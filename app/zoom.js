@@ -12,11 +12,8 @@ export default function Zoom() {
                     "shareApp"
                 ]
             }))
-    };
-
+        };
         configure().catch(e => console.error(e))
-
-
     }, [])
 
     console.log("Zoom App Configuration", config);
