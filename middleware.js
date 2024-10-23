@@ -1,11 +1,7 @@
-// Middleware here can mock the x-zoom-app-context header
-
 import { NextResponse, userAgent } from 'next/server'
 
-
+// mock a zoom app header when not on production
 export function middleware(request) {
-
-    // mock a zoom app context when not on production
     if (process.env.NODE_ENV !== 'production') {
         const requestHeaders = new Headers(request.headers);
         const { ua } = userAgent(request);
