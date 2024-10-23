@@ -5,17 +5,16 @@ import {deleteSession} from "@/app/lib/session";
 
 export async function GET(request) {
     const { searchParams } = request.nextUrl;
+
     const code = searchParams.get('code');
-    const state = searchParams.get('state');
-
-    const session = await verifySession();
-
-    if (!session)
-        return handleError(500,'invalid session');
-
     if (!code)
         return handleError(404,'invalid code parameter');
 
+    const session = await verifySession();
+    if (!session)
+        return handleError(500,'invalid session');
+
+    const state = searchParams.get('state');
     if (!state || state !== session.state)
         return handleError(404,'invalid state parameter');
 
