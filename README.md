@@ -54,11 +54,6 @@ Next, select the **Surface** tab and enter the Ngrok URL as your Home URL
 
 ![surface tab](public/surface-tab.png)
 
-Open a new terminal and copy the environment file
-
-```bash
-cp .env{.example,.local}
-```
 
 Enter your credentials in .env.local
 
