@@ -1,12 +1,21 @@
 import Image from "next/image";
+import dynamic from 'next/dynamic'
 import {headers} from "next/headers";
-import Zoom from "@/app/zoom";
 
 export default async function Home() {
-    const headersList = await headers()
+    let Zoom
 
     // if this header is present - we're in Zoom
+    const headersList = await headers()
     const isZoom = headersList.has('x-zoom-app-device-type');
+
+    const loadZoom = () => {
+        if (!isZoom) return;
+
+        Zoom = dynamic(() => import('./zoom.js'));
+
+        return (<Zoom/>)
+    }
 
     const renderInstallBtn = () => {
         if (!isZoom) {
@@ -30,7 +39,7 @@ export default async function Home() {
                 src="/logo.svg"
                 alt="Zoom logo"
                 width={180}
-                height={38}
+                height={32}
                 priority
             />
             <main className="flex flex-row gap-x-20 row-start-2 pb-48 items-center justify-items-center sm:items-start">
@@ -42,13 +51,11 @@ export default async function Home() {
                     <span> Running in {isZoom ? "Zoom" : "Browser"} </span>
 
                 </div>
-
-                <Zoom />
             </main>
             <footer className="w-full">
                 {renderInstallBtn()}
             </footer>
-
+            {loadZoom()}
         </div>
     )
 }
